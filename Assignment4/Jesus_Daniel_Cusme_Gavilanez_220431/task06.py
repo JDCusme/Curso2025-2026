@@ -163,15 +163,13 @@ except Exception as e:
 
 """
 
-VCARD = Namespace("http://www.w3.org/2001/vcard-rdf/3.0#")
-FOAF  = Namespace("http://xmlns.com/foaf/0.1/")
-g.namespace_manager.bind('vcard-rdf', VCARD, override=False)
-g.namespace_manager.bind('foaf', FOAF, override=False)
+VCARD = Namespace("http://www.w3.org/2001/vcard-rdf/3.0/")
+FOAF = Namespace("http://xmlns.com/foaf/0.1/")
 
-# Properties to Oscar
+# Add properties to Oscar
 g.add((person.Oscar, VCARD.Given, Literal("Oscar", datatype=XSD.string)))
 g.add((person.Oscar, VCARD.Family, Literal("Corcho", datatype=XSD.string)))
-g.add((person.Oscar, FOAF.EMAIL, Literal("ocorcho@fi.upm.es")))
+g.add((person.Oscar, FOAF.email, Literal("ocorcho@fi.upm.es", datatype=XSD.string)))
 
 # Visualize the results
 print("\n--- Results for Task 6.4 (Oscar's details) ---")
