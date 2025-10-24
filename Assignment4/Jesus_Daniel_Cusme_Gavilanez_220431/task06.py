@@ -19,8 +19,9 @@ github_storage = "https://raw.githubusercontent.com/FacultadInformatica-LinkedDa
 """Import RDFLib main methods"""
 
 from rdflib import Graph, Namespace, Literal, XSD
-from rdflib.namespace import RDF, RDFS, FOAF
+from rdflib.namespace import RDF, RDFS
 from validation import Report
+import rdflib
 g = Graph()
 g.namespace_manager.bind('ns', Namespace("http://somewhere#"), override=False)
 r = Report()
@@ -137,7 +138,7 @@ g.add((person.Asun, ontology.hasHomePage, Literal("http://oeg.fi.upm.es/", datat
 
 # Create Raul (InterimAssociateProfessor)
 g.add((person.Raul, RDF.type, ontology.InterimAssociateProfessor))
-g.add((ontology.Raul, ontology.hasName, Literal("Raul", datatype=XSD.string)))
+g.add((person.Raul, RDFS.label, Literal("Raul", datatype=XSD.string)))
 
 # Add relationships
 g.add((person.Oscar, ontology.hasColleague, person.Asun))
@@ -163,6 +164,7 @@ except Exception as e:
 """
 
 VCARD = Namespace("http://www.w3.org/2001/vcard-rdf/3.0#")
+FOAF  = Namespace("http://xmlns.com/foaf/0.1/")
 g.namespace_manager.bind('vcard', VCARD, override=False)
 g.namespace_manager.bind('foaf', FOAF, override=False)
 
@@ -174,7 +176,7 @@ g.add((person.Oscar, FOAF.EMAIL, Literal("ocorcho@fi.upm.es", datatype=XSD.strin
 # Visualize the results
 print("\n--- Results for Task 6.4 (Oscar's details) ---")
 for s, p_term, o in g.triples((person.Oscar, None, None)):
-  if p_term in [VCARD.Given, VCARD.Family, VCARD.EMAIL]:
+  if p_term in [VCARD.Given, VCARD.Family, FOAF.EMAIL]:
     print(s,p_term,o)
 
 # Visualize all triples in the graph now
