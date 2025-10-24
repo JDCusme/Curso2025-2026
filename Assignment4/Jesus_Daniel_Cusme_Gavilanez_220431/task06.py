@@ -171,7 +171,7 @@ g.namespace_manager.bind('foaf', FOAF, override=False)
 # Properties to Oscar
 g.add((person.Oscar, VCARD.Given, Literal("Oscar", datatype=XSD.string)))
 g.add((person.Oscar, VCARD.Family, Literal("Corcho", datatype=XSD.string)))
-g.add((person.Oscar, FOAF.EMAIL, Literal("ocorcho@fi.upm.es", datatype=XSD.string)))
+g.add((person.Oscar, FOAF.EMAIL, Literal("ocorcho@fi.upm.es")))
 
 # Visualize the results
 print("\n--- Results for Task 6.4 (Oscar's details) ---")
