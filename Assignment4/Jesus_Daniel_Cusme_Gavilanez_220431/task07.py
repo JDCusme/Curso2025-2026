@@ -66,8 +66,12 @@ else:
     for r_tuple in result:
       print(r_tuple)
 # Validation
-report.validate_07_03(g, result)
-
+print("\nValidating Task 7.1a...")
+try:
+    report.validate_07_1a(result)
+    print("Task 7.1a Validation Passed (likely)")
+except Exception as e:
+    print(f"Task 7.1a Validation Error: {e}")
 
 
 """**TASK 7.1b: Repeat the same exercise in SPARQL, returning the variables ?c (class) and ?sc (superclass)**"""
@@ -94,9 +98,12 @@ else:
       print(row.c, row.sc)
 
 # Validation
-report.validate_07_03(g, query_71b)
-
-
+print("\nValidating Task 7.1b...")
+try:
+    report.validate_07_1b(query_71b, g) # Correct function: validate_07_1b requires the query string and graph
+    print("Task 7.1b Validation Passed (likely)")
+except Exception as e:
+    print(f"Task 7.1b Validation Error: {e}")
 
 """**TASK 7.2a: List all individuals of "Person" with RDFLib (remember the subClasses). Return the individual URIs in a list called "individuals"**
 
@@ -150,8 +157,12 @@ else:
       print(i)
 
 # validation
-report.validate_07_03(g, individuals)
-
+print("\nValidating Task 7.2a...")
+try:
+    report.validate_07_02a(individuals) # Correct function: validate_07_02a requires the list 'individuals'
+    print("Task 7.2a Validation Passed (likely)")
+except Exception as e:
+    print(f"Task 7.2a Validation Error: {e}")
 
 
 """**TASK 7.2b: Repeat the same exercise in SPARQL, returning the individual URIs in a variable ?ind**"""
@@ -179,8 +190,12 @@ else:
       print(row.ind)
 
 # Validation
-report.validate_07_03(g, query_72b)
-
+print("\nValidating Task 7.2b...")
+try:
+    report.validate_07_02b(g, query_72b) 
+    print("Task 7.2b Validation Passed (likely)")
+except Exception as e:
+    print(f"Task 7.2b Validation Error: {e}")
 
 """**TASK 7.3:  List the name and type of those who know Rocky (in SPARQL only). Use name and type as variables in the query**"""
 
@@ -211,8 +226,12 @@ else:
       print(row.name, row.type)
 
 # Validation
-report.validate_07_03(g, query_73)
-
+print("\nValidating Task 7.3...")
+try:
+    report.validate_07_03(g, query_73) # Correct function and arguments
+    print("Task 7.3 Validation Passed (likely)")
+except Exception as e:
+    print(f"Task 7.3 Validation Error: {e}")
 
 
 """**Task 7.4: List the name of those entities who have a colleague with a dog, or that have a collegue who has a colleague who has a dog (in SPARQL). Return the results in a variable called name**"""
@@ -255,5 +274,14 @@ else:
       print(row.name)
 
 # Validation
-report.validate_07_04(g,query_74)
-report.save_report("_Task_07")
+print("\nValidating Task 7.4...")
+try:
+    report.validate_07_04(g, query_74)
+    print("Task 7.4 Validation Passed (likely)")
+    print("\nSaving final report for Task 07...")
+    report.save_report("_Task_07")
+    print("Report _Task_07 saved.")
+except Exception as e:
+    print(f"Task 7.4 Validation or Save Error: {e}")
+
+print("\n--- End of Task 07 ---")
