@@ -165,7 +165,7 @@ except Exception as e:
 
 VCARD = Namespace("http://www.w3.org/2001/vcard-rdf/3.0#")
 FOAF  = Namespace("http://xmlns.com/foaf/0.1/")
-g.namespace_manager.bind('vcard', VCARD, override=False)
+g.namespace_manager.bind('vcard-rdf', VCARD, override=False)
 g.namespace_manager.bind('foaf', FOAF, override=False)
 
 # Properties to Oscar
