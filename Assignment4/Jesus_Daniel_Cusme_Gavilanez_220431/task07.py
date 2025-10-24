@@ -239,29 +239,30 @@ except Exception as e:
 
 query_74 = """
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX ont: <http://oeg.fi.upm.es/def/people#> # Ensure Dog, has_pet, hasColleague are here
+PREFIX ont: <http://oeg.fi.upm.es/def/people#> 
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 
 SELECT DISTINCT ?name
 WHERE {
-  # Ensure the entity has a label first
-  ?entity rdfs:label ?name .
   {
-    # Case 1: Has a colleague who owns a Dog
-    ?entity ont:hasColleague ?colleague .
-    ?colleague ont:has_pet ?pet . 
-    ?pet a ont:Dog . 
+    # Case 1: Has a colleague who owns an Animal
+    ?entity ont:hasColleague/ont:ownsPet ?pet .
+    ?pet a ont:Animal . # Check for Animal
   }
   UNION
   {
-    # Case 2: Has a colleague -> colleague -> owns a Dog
-    ?entity ont:hasColleague ?colleague1 .
-    ?colleague1 ont:hasColleague ?colleague2 .
-    ?colleague2 ont:has_pet ?pet . 
-    ?pet a ont:Dog . 
+    # Case 2: Has a colleague -> colleague -> owns an Animal
+    ?entity ont:hasColleague/ont:hasColleague/ont:ownsPet ?pet .
+    ?pet a ont:Animal . # Check for Animal
   }
+
+  # Get name from hasName or label
+  OPTIONAL { ?entity ont:hasName ?n1 . }
+  OPTIONAL { ?entity rdfs:label ?n2 . }
+  BIND(COALESCE(?n1, ?n2) AS ?name)
+  FILTER(BOUND(?name)) # Ensure an entity with a name was found
 }
-ORDER BY ?name # Optional: Order for consistency
+ORDER BY ?name
 """
 
 # Visualize
