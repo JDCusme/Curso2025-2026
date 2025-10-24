@@ -19,7 +19,7 @@ github_storage = "https://raw.githubusercontent.com/FacultadInformatica-LinkedDa
 """Import RDFLib main methods"""
 
 from rdflib import Graph, Namespace, Literal, XSD
-from rdflib.namespace import RDF, RDFS
+from rdflib.namespace import RDF, RDFS, FOAF
 from validation import Report
 g = Graph()
 g.namespace_manager.bind('ns', Namespace("http://somewhere#"), override=False)
@@ -127,16 +127,17 @@ except Exception as e:
 
 # Create Oscar (AssociateProfessor)
 g.add((person.Oscar, RDF.type, ontology.AssociateProfessor))
-g.add((person.Oscar, ontology.hasName, Literal("Oscar"))) 
+g.add((person.Oscar, RDFS.label, Literal("Oscar", datatype=XSD.string))) 
+g.add((person.Oscar, ontology.hasName, Literal("Óscar Corcho García", datatype=XSD.string)))
 
 # Create Asun (FullProfessor)
 g.add((person.Asun, RDF.type, ontology.FullProfessor))
-g.add((ontology.Asun, ontology.hasName, Literal("Asun")))
-g.add((person.Asun, ontology.hasHomePage, Literal("http://www.oeg-upm.net/")))
+g.add((person.Asun, RDFS.label, Literal("Asun", datatype=XSD.string)))
+g.add((person.Asun, ontology.hasHomePage, Literal("http://oeg.fi.upm.es/", datatype=XSD.string)))
 
 # Create Raul (InterimAssociateProfessor)
 g.add((person.Raul, RDF.type, ontology.InterimAssociateProfessor))
-g.add((ontology.Raul, ontology.hasName, Literal("Raul")))
+g.add((ontology.Raul, ontology.hasName, Literal("Raul", datatype=XSD.string)))
 
 # Add relationships
 g.add((person.Oscar, ontology.hasColleague, person.Asun))
@@ -163,11 +164,12 @@ except Exception as e:
 
 VCARD = Namespace("http://www.w3.org/2001/vcard-rdf/3.0#")
 g.namespace_manager.bind('vcard', VCARD, override=False)
+g.namespace_manager.bind('foaf', FOAF, override=False)
 
 # Properties to Oscar
 g.add((person.Oscar, VCARD.Given, Literal("Oscar", datatype=XSD.string)))
 g.add((person.Oscar, VCARD.Family, Literal("Corcho", datatype=XSD.string)))
-g.add((person.Oscar, VCARD.EMAIL, Literal("ocorcho@fi.upm.es")))
+g.add((person.Oscar, FOAF.EMAIL, Literal("ocorcho@fi.upm.es", datatype=XSD.string)))
 
 # Visualize the results
 print("\n--- Results for Task 6.4 (Oscar's details) ---")
