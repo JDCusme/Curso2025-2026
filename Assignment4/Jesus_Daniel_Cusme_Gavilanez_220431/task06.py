@@ -129,11 +129,13 @@ g.add((person.Oscar, ontology.hasName, Literal("Oscar")))
 
 # Create Asun (FullProfessor)
 g.add((person.Asun, RDF.type, ontology.FullProfessor))
+g.add((ontology.Asun, ontology.hasName, Literal("Asun")))
 g.add((person.Asun, ontology.hasHomePage, Literal("http://www.oeg-upm.net/")))
 
 # Create Raul (InterimAssociateProfessor)
 g.add((person.Raul, RDF.type, ontology.InterimAssociateProfessor))
-g.add((person.Raul, RDFS.label, Literal("Raul", datatype=XSD.string))) 
+g.add((person.Raul, RDFS.label, Literal("Raul", datatype=XSD.string)))
+g.add((ontology.Raul, ontology.hasName, Literal("Raul")))
 
 # Add relationships
 g.add((person.Oscar, ontology.hasColleague, person.Asun))
@@ -164,7 +166,7 @@ VCARD = Namespace("http://www.w3.org/2001/vcard-rdf/3.0#")
 # Properties to Oscar
 g.add((person.Oscar, VCARD.Given, Literal("Oscar", datatype=XSD.string)))
 g.add((person.Oscar, VCARD.Family, Literal("Corcho", datatype=XSD.string)))
-g.add((person.Oscar, VCARD.EMAIL, Literal("ocorcho@fi.upm.es", datatype=XSD.string)))
+g.add((person.Oscar, VCARD.EMAIL, Literal("ocorcho@fi.upm.es")))
 
 # Visualize the results
 print("\n--- Results for Task 6.4 (Oscar's details) ---")
