@@ -27,10 +27,12 @@ r = Report()
 
 
 """Create a new class named Researcher"""
-ns_mydomain = Namespace("http://mydomain.org#") 
+ns_mydomain = Namespace("http://mydomain.org#")
 g.add((ns_mydomain.Researcher, RDF.type, RDFS.Class))
+print("--- Initial Researcher Class ---")
 for s, p, o in g.triples((ns_mydomain.Researcher, None, None)):
   print(s,p,o)
+print("--- End Initial ---")
 
 
 """**Task 6.0: Create new prefixes for "ontology" and "person" as shown in slide 14 of the Slidedeck 01a.RDF(s)-SPARQL shown in class.**"""
@@ -134,7 +136,6 @@ g.add((person.Asun, ontology.hasHomePage, Literal("http://www.oeg-upm.net/")))
 
 # Create Raul (InterimAssociateProfessor)
 g.add((person.Raul, RDF.type, ontology.InterimAssociateProfessor))
-g.add((person.Raul, RDFS.label, Literal("Raul", datatype=XSD.string)))
 g.add((ontology.Raul, ontology.hasName, Literal("Raul")))
 
 # Add relationships
@@ -161,7 +162,7 @@ except Exception as e:
 """
 
 VCARD = Namespace("http://www.w3.org/2001/vcard-rdf/3.0#")
-
+g.namespace_manager.bind('vcard', VCARD, override=False)
 
 # Properties to Oscar
 g.add((person.Oscar, VCARD.Given, Literal("Oscar", datatype=XSD.string)))
