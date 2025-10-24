@@ -145,7 +145,7 @@ print("\n--- Results for Task 7.2a ---")
 if not individuals:
   print("No individuals found for ont:Person or its subclasses.")
 else:
-    individuals.sort() +
+    individuals.sort()
     for i in individuals:
       print(i)
 
